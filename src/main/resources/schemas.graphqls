@@ -1,0 +1,33 @@
+schema {
+	query : Query
+}
+scalar BigDecimal
+enum OrderType {
+  PURCHASE
+  SALE
+  RETURN
+}
+
+type Query {
+	customers(first: Int, offset: Int): [Customer]
+	customer(id: String): Customer
+	orderByName(name: String): [Order]
+	orderById(id: String): Order
+}
+
+type Customer {
+	customerId: Int
+	name: String 
+	age: Int
+	countryFrom: String
+	countryLiving: String
+}
+
+type Order {
+	id: Int
+	orderType: OrderType
+	ownerName: String
+	supplierName: String
+	amount: Int
+	price: BigDecimal
+}
