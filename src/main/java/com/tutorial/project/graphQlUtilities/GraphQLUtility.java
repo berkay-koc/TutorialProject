@@ -8,7 +8,7 @@ import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Component;
 
 import com.tutorial.project.dataFetchers.AllCustomersDataFetcher;
-import com.tutorial.project.dataFetchers.AllOrdersDataFetcher;
+import com.tutorial.project.dataFetchers.OrdersByNameDataFetcher;
 import com.tutorial.project.dataFetchers.CustomerDataFetcher;
 import com.tutorial.project.dataFetchers.OrderDataFetcher;
 
@@ -34,14 +34,14 @@ public class GraphQLUtility {
 	private CustomerDataFetcher customerDataFetcher;
 	private AllCustomersDataFetcher allCustomersDataFetcher;
 	private OrderDataFetcher orderDataFetcher;
-	private AllOrdersDataFetcher allOrdersDataFetcher;
+	private OrdersByNameDataFetcher ordersByNameDataFetcher;
 
 	public GraphQLUtility(CustomerDataFetcher customerDataFetcher, AllCustomersDataFetcher allCustomersDataFetcher,
-			OrderDataFetcher orderDataFetcher, AllOrdersDataFetcher allOrdersDataFetcher) throws IOException {
+			OrderDataFetcher orderDataFetcher, OrdersByNameDataFetcher ordersByNameDataFetcher) throws IOException {
 		this.customerDataFetcher = customerDataFetcher;
 		this.allCustomersDataFetcher = allCustomersDataFetcher;
 		this.orderDataFetcher = orderDataFetcher;
-		this.allOrdersDataFetcher = allOrdersDataFetcher;
+		this.ordersByNameDataFetcher = ordersByNameDataFetcher;
 	}
 
 	@PostConstruct
@@ -58,7 +58,7 @@ public class GraphQLUtility {
 				.type("Query",
 						typeWiring -> typeWiring.dataFetcher("customers", allCustomersDataFetcher)
 								.dataFetcher("customer", customerDataFetcher).dataFetcher("orderById", orderDataFetcher)
-								.dataFetcher("orderByName", allOrdersDataFetcher))
+								.dataFetcher("orderByName", ordersByNameDataFetcher))
 				.build();
 	}
 }

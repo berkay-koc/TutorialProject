@@ -9,4 +9,6 @@ public interface OrderService {
 	Order findOneById(Integer id);
 	
 	List<Order> findOrdersByName(String name);
+	
+	Order save(Order order);
 }

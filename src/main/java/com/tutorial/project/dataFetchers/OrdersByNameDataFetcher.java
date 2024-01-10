@@ -12,7 +12,7 @@ import graphql.schema.DataFetcher;
 import graphql.schema.DataFetchingEnvironment;
 
 @Component
-public class AllOrdersDataFetcher implements DataFetcher<List<Order>> {
+public class OrdersByNameDataFetcher implements DataFetcher<List<Order>> {
 
 	@Autowired
 	OrderService orderService;

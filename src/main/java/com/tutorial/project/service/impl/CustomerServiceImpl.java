@@ -2,7 +2,11 @@ package com.tutorial.project.service.impl;
 
 import java.util.List;
 
-import org.springframework.data.domain.Sort;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.mongodb.core.MongoOperations;
+import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.data.mongodb.core.query.Query;
+import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.stereotype.Service;
 
 import com.tutorial.project.models.Customer;
@@ -10,12 +14,15 @@ import com.tutorial.project.repository.CustomerRepository;
 import com.tutorial.project.service.CustomerService;
 
 @Service
-public class CustomerServiceImplementation implements CustomerService{
+public class CustomerServiceImpl implements CustomerService{
 	
 	private final CustomerRepository customerRepository;
 	
+	@Autowired
+	private MongoOperations mongoOperations;
 	
-	CustomerServiceImplementation(CustomerRepository customerRepository) {
+	
+	CustomerServiceImpl(CustomerRepository customerRepository) {
         this.customerRepository = customerRepository;
     }
 	
@@ -27,6 +34,11 @@ public class CustomerServiceImplementation implements CustomerService{
 	@Override
 	public List<Customer> findAllCustomers() {
         return customerRepository.findAll();
+	}
+
+	@Override
+	public Customer save(Customer customer) {
+		return customerRepository.save(customer);
 	}
 
 }

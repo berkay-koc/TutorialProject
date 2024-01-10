@@ -9,10 +9,10 @@ import com.tutorial.project.repository.OrderRepository;
 import com.tutorial.project.service.OrderService;
 
 @Service
-public class OrderServiceImplementation implements OrderService{
+public class OrderServiceImpl implements OrderService{
 	private final OrderRepository orderRepository;
 	
-	OrderServiceImplementation(OrderRepository orderRepository){
+	OrderServiceImpl(OrderRepository orderRepository){
 		this.orderRepository = orderRepository;
 	}
 
@@ -24,6 +24,11 @@ public class OrderServiceImplementation implements OrderService{
 	@Override
 	public List<Order> findOrdersByName(String name) {
 		return orderRepository.findOrdersByOwnerName(name);
+	}
+
+	@Override
+	public Order save(Order order) {
+		return orderRepository.save(order);
 	}
 	
 	
